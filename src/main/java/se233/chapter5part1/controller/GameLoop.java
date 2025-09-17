@@ -40,11 +40,19 @@ public class GameLoop implements Runnable {
             }
         }
     }
+    private void updateScore(List<Score> scoreList, List<GameCharacter> gameCharacterList) {
+        javafx.application.Platform.runLater(()-> {
+            for (int i=0 ; i<scoreList.size() ; i++) {
+                scoreList.get(i).setPoint(gameCharacterList.get(i).getScore());
+            }
+        });
+    }
     @Override
     public void run() {
         while (running) {
             float time = System.currentTimeMillis();
             update(gameStage.getGameCharacterList());
+            updateScore(gameStage.getScoreList(), gameStage.getGameCharacterList());
             time = System.currentTimeMillis() - time;
             if (time < interval) {
                 try {

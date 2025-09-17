@@ -6,13 +6,18 @@ import javafx.scene.layout.Pane;
 import se233.chapter5part1.Launcher;
 import se233.chapter5part1.view.GameStage;
 
+import java.util.concurrent.TimeUnit;
+
 public class GameCharacter extends Pane {
     private Image characterImg;
     private AnimatedSprite imageView;
     private int x;
     private int y;
+    private int startX;
+    private int startY;
     private int characterWidth;
     private int characterHeight;
+    private int score=0;
     private KeyCode leftKey;
     private KeyCode rightKey;
     private KeyCode upKey;
@@ -31,6 +36,8 @@ public class GameCharacter extends Pane {
     public GameCharacter(int id, int x, int y, String imgName, int count, int column, int row, int width, int height, KeyCode leftKey, KeyCode rightKey, KeyCode upKey) {
         this.x = x;
         this.y = y;
+        this.startX = x;
+        this.startY = y;
         this.setTranslateX(x);
         this.setTranslateY(y);
         this.characterWidth = width;
@@ -113,6 +120,49 @@ public class GameCharacter extends Pane {
         moveX();
         moveY();
     }
+
+    public boolean collided(GameCharacter c) {
+        if (this. isMoveLeft && this.x > c.getX()) {
+            this.x = Math.max(this.x, c.getX() + c.getCharacterWidth());
+            this.stop();
+        } else if (this. isMoveRight && this.x < c.getX()) {
+            this.x = Math.min(this.x, c.getX() - this.characterWidth);
+            this.stop();
+        }
+        if (this. isFalling && this.y < c.getY()) {
+            score++;
+            this.y = Math.min(GameStage.GROUND- this.characterHeight, c.getY());
+            this.repaint();
+            c.collapsed();
+            c.respawn();
+            return true;
+        }
+        return false;
+    }
+
+    public void collapsed() {
+        this.imageView.setFitHeight(5);
+        this.y = this.y + this.characterHeight - 5;
+        this.repaint();
+        try {
+            TimeUnit.MILLISECONDS.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void respawn() {
+        this.x = this.startX;
+        this.y = this.startY;
+        this.imageView.setFitWidth(this.characterWidth);
+        this.imageView.setFitHeight(this.characterHeight);
+        this.isMoveLeft = false;
+        this.isMoveRight = false;
+        this.isFalling = true;
+        this.canJump = false;
+        this.isJumping = false;
+    }
+
     public KeyCode getLeftKey() {
 
         return leftKey;
