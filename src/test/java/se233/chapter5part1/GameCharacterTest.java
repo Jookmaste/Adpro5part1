@@ -17,20 +17,24 @@ public class GameCharacterTest {
         javafx.application.Platform.startup(() -> {
         });
     }
+
     @BeforeEach
     public void setUp() throws NoSuchFieldException {
         gameCharacter = new GameCharacter(0,30, 30,"assets/Character1.png", 4, 3
                 ,2, 111,97, KeyCode.A, KeyCode.D, KeyCode.W);
     }
+
     @Test
     public void respawn_givenNewGameCharacter_thenCoordinatesAre30_30() {
         gameCharacter.respawn();
         assertEquals(30, gameCharacter.getX(), "Initial x");
         assertEquals(30, gameCharacter.getY(), "Initial y");
     }
+
     @Test
     public void respawn_givenNewGameCharacter_thenScoreIs0() {
         gameCharacter.respawn();
         assertEquals(0, gameCharacter.getScore(), "Initial score");
     }
+
 }

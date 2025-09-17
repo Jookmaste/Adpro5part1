@@ -44,4 +44,8 @@ public class GameStage extends Pane {
 
         return keys;
     }
+
+    public List<Score> getScoreList() {
+        return scoreList;
+    }
 }

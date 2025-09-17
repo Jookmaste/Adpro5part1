@@ -2,6 +2,7 @@ package se233.chapter5part1.controller;
 
 import se233.chapter5part1.model.GameCharacter;
 import se233.chapter5part1.view.GameStage;
+import se233.chapter5part1.view.Score;
 
 import java.util.List;
 
