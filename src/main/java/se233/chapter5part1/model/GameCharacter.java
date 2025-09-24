@@ -21,17 +21,17 @@ public class GameCharacter extends Pane {
     private KeyCode leftKey;
     private KeyCode rightKey;
     private KeyCode upKey;
-    int xVelocity = 0;
-    int yVelocity = 0;
+    public int xVelocity = 0;
+    public int yVelocity = 0;
     int xAcceleration = 1;
     int yAcceleration = 1;
     int xMaxVelocity = 7;
-    int yMaxVelocity = 17;
-    boolean isMoveLeft = false;
-    boolean isMoveRight = false;
-    boolean isFalling = true;
-    boolean canJump = false;
-    boolean isJumping = false;
+    public int yMaxVelocity = 17;
+    public boolean isMoveLeft = false;
+    public boolean isMoveRight = false;
+    public boolean isFalling = true;
+    public boolean canJump = false;
+    public boolean isJumping = false;
 
     public GameCharacter(int id, int x, int y, String imgName, int count, int column, int row, int width, int height, KeyCode leftKey, KeyCode rightKey, KeyCode upKey) {
         this.x = x;
@@ -90,8 +90,8 @@ public class GameCharacter extends Pane {
     public void checkReachGameWall() {
         if(x <= 0) {
             x = 0;
-        } else if( x+getWidth() >= GameStage.WIDTH) {
-            x = GameStage.WIDTH-(int)getWidth();
+        } else if( x + characterWidth >= GameStage.WIDTH) {
+                x = GameStage.WIDTH - characterWidth;
         }
     }
     public void jump() {

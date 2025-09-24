@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameStage extends Pane {
-    public static final int WIDTH = 800;
+    public static int WIDTH = 800;
     public static final int HEIGHT = 400;
     public final static int GROUND = 300;
     private Image gameStageImg;
